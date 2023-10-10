@@ -1,5 +1,5 @@
 ---
-version: "3"  
+version: "3"
 
 networks:
   frontend:
@@ -10,11 +10,8 @@ services:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     env_file:
+      - ../.shared.env
       - .env
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Sao_Paulo
     volumes:
       - ./data:/data
     # ports:
@@ -22,4 +19,4 @@ services:
     #   - 50443:443
     restart: unless-stopped
     networks:
-      - frontend  
+      - frontend

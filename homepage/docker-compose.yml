@@ -8,10 +8,8 @@ services:
   homepage:
     image: ghcr.io/benphelps/homepage:latest
     container_name: homepage
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Sao_Paulo
+    env_file:
+      - ../.shared.env
     # ports:
     #   - 3000:3000
     volumes:

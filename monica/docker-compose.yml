@@ -10,7 +10,8 @@ services:
   monica:
     image: monica
     container_name: monica
-    env_file: .env
+    env_file:
+      - ../.shared.env
     depends_on:
       - monica-db
     ports:
@@ -25,7 +26,8 @@ services:
   monica-cron:
     image: monica
     container_name: monica-cron
-    env_file: .env
+    env_file:
+      - ../.shared.env
     restart: unless-stopped
     volumes:
       - ./data:/var/www/html/storage
@@ -41,13 +43,9 @@ services:
     restart: unless-stopped
     volumes:
       - ./database:/var/lib/mysql:rw
-    environment:
-      TZ: America/Sao_Paulo
-      #MARIADB_RANDOM_ROOT_PASSWORD: "yes"
-      MARIADB_ROOT_PASSWORD: my-secret-pw
-      MARIADB_DATABASE: monica
-      MARIADB_USER: monica
-      MARIADB_PASSWORD: secret
+    env_file:
+      - ../.shared.env
+      - .env
     # ports:
     #   - 3306:3306
     networks:

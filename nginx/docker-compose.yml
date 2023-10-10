@@ -6,30 +6,28 @@ networks:
 
 services:
   nginx:
-    image: 'jc21/nginx-proxy-manager:latest'
+    image: "jc21/nginx-proxy-manager:latest"
     restart: unless-stopped
     container_name: nginx
     ports:
       # These ports are in format <host-port>:<container-port>
-      - '80:80' # Public HTTP Port
-      - '443:443' # Public HTTPS Port
+      - "80:80" # Public HTTP Port
+      - "443:443" # Public HTTPS Port
       # - '81:81' # Admin Web Port
       # Add any other Stream port you want to expose
       # - '21:21' # FTP
 
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Sao_Paulo
+    env_file:
+      - ../.shared.env
 
     # Uncomment the next line if you uncomment anything in the section
     # environment:
-      # Uncomment this if you want to change the location of
-      # the SQLite DB file within the container
-      # DB_SQLITE_FILE: "/data/database.sqlite"
+    # Uncomment this if you want to change the location of
+    # the SQLite DB file within the container
+    # DB_SQLITE_FILE: "/data/database.sqlite"
 
-      # Uncomment this if IPv6 is not enabled on your host
-      # DISABLE_IPV6: 'true'
+    # Uncomment this if IPv6 is not enabled on your host
+    # DISABLE_IPV6: 'true'
 
     volumes:
       - ./data:/data

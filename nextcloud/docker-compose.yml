@@ -1,5 +1,5 @@
 ---
-version: "3"  
+version: "3"
 
 networks:
   frontend:
@@ -9,10 +9,8 @@ services:
   nextcloud:
     image: lscr.io/linuxserver/nextcloud:latest
     container_name: nextcloud
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Sao_Paulo
+    env_file:
+      - ../.shared.env
     volumes:
       - ./config:/config
       - ./data:/data
